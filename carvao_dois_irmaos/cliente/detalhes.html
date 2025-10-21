@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Produto - Carvão Especial Dois Irmãos</title>
+    <link rel="stylesheet" href="../assets/css/detalhes.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1><a href="produtos.html">Carvão Especial Dois Irmãos</a></h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="O que você está buscando?">
+                <button id="searchBtn">🔍</button>
+            </div>
+            <div class="header-actions">
+                <div class="user-info">
+                    <span id="userName">Olá, Visitante</span>
+                    <button id="logoutBtn" class="btn-logout">Sair</button>
+                </div>
+                <div class="cart-icon">
+                    <a href="carrinho.html">
+                        🛒 <span id="cartCount">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="produtos.html">Produtos</a></li>
+                <li><a href="localizacao.html">Localização</a></li>
+                <li><a href="meus_pedidos.html">Meus Pedidos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="produtos.html">Produtos</a> > <span id="breadcrumbProduct">Detalhes</span>
+            </div>
+
+            <div class="product-details" id="productDetails">
+                <!-- Conteúdo será carregado dinamicamente -->
+            </div>
+
+            <section class="related-products">
+                <h2>Produtos Relacionados</h2>
+                <div class="products-grid" id="relatedProducts">
+                    <!-- Produtos relacionados serão carregados dinamicamente -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Sobre Nós</h3>
+                <p>Carvão Especial Dois Irmãos - Qualidade que acende a sua paixão!</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contato</h3>
+               <p>📞 (48)998498867</p>
+                <p>📧 dasilvanicolas117@gmail.com</p>
+            </div>
+            <div class="footer-section">
+                 <h3>Redes Sociais</h3>
+                <p>
+                    <a href="https://www.instagram.com/carvao_dois_irmaos2?igsh=amFreGI3dnluOWNi">Instagram</a>
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p><a href="#">Termos de Uso</a> | <a href="#">Política de Privacidade</a></p>
+            <p>&copy; 2025 Carvão Especial Dois Irmãos. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/detalhes.js"></script>
+</body>
+</html>
+

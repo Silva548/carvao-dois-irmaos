@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - Carvão Especial Dois Irmãos</title>
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>Admin Panel</h2>
+                <p>Carvão Dois Irmãos</p>
+            </div>
+            <nav class="admin-nav">
+                <ul>
+                    <li><a href="#" class="nav-link active" data-section="produtos">📦 Produtos</a></li>
+                    <li><a href="#" class="nav-link" data-section="pedidos">🛒 Pedidos</a></li>
+                    <li><a href="#" class="nav-link" data-section="estatisticas">📊 Estatísticas</a></li>
+                    <li><a href="../cliente/produtos.html" class="nav-link">🏠 Voltar ao Site</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="admin-header">
+                <h1 id="sectionTitle">Gerenciar Produtos</h1>
+                <div class="header-actions">
+                    <span class="admin-user">👤 Administrador</span>
+                </div>
+            </header>
+
+            <!-- Seção de Produtos -->
+            <section id="produtos-section" class="content-section active">
+                <div class="section-actions">
+                    <button class="btn btn-primary" id="addProductBtn">+ Adicionar Produto</button>
+                </div>
+
+                <div class="products-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Imagem</th>
+                                <th>Nome</th>
+                                <th>Categoria</th>
+                                <th>Preço Retirada</th>
+                                <th>Preço Entrega</th>
+                                <th>Estoque</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productsTableBody">
+                            <!-- Produtos serão carregados aqui -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Seção de Pedidos -->
+            <section id="pedidos-section" class="content-section">
+                <div class="orders-filters">
+                    <select id="statusFilter">
+                        <option value="todos">Todos os Status</option>
+                        <option value="Pendente">Pendente</option>
+                        <option value="Confirmado">Confirmado</option>
+                        <option value="Em Preparação">Em Preparação</option>
+                        <option value="Pronto para Retirada">Pronto para Retirada</option>
+                        <option value="Em Entrega">Em Entrega</option>
+                        <option value="Concluído">Concluído</option>
+                        <option value="Cancelado">Cancelado</option>
+                    </select>
+                </div>
+
+                <div class="orders-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Data</th>
+                                <th>Cliente</th>
+                                <th>Total</th>
+                                <th>Pagamento</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersTableBody">
+                            <!-- Pedidos serão carregados aqui -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Seção de Estatísticas -->
+            <section id="estatisticas-section" class="content-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total de Vendas</h3>
+                        <p class="stat-value" id="totalVendas">R$ 0,00</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Pedidos Hoje</h3>
+                        <p class="stat-value" id="pedidosHoje">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Produtos em Estoque</h3>
+                        <p class="stat-value" id="produtosEstoque">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Pedidos Pendentes</h3>
+                        <p class="stat-value" id="pedidosPendentes">0</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal para Gerenciar Pedido -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="close" onclick="fecharModalPedido()">&times;</span>
+            <h2>Detalhes do Pedido #<span id="orderIdDisplay"></span></h2>
+            
+            <div class="order-details">
+                <div class="order-section">
+                    <h3>Informações do Cliente</h3>
+                    <p><strong>Nome:</strong> <span id="orderClientName"></span></p>
+                    <p><strong>Email:</strong> <span id="orderClientEmail"></span></p>
+                    <p><strong>Telefone:</strong> <a href="#" id="orderClientPhone"></a></p>
+                    <p><strong>Endereço:</strong> <span id="orderClientAddress"></span></p>
+                </div>
+                
+                <div class="order-section">
+                    <h3>Itens do Pedido</h3>
+                    <div id="orderItems"></div>
+                </div>
+                
+                <div class="order-section">
+                    <h3>Informações do Pedido</h3>
+                    <p><strong>Data:</strong> <span id="orderDate"></span></p>
+                    <p><strong>Forma de Pagamento:</strong> <span id="orderPayment"></span></p>
+                    <p><strong>Subtotal:</strong> R$ <span id="orderSubtotal"></span></p>
+                    <p><strong>Custo de Entrega:</strong> R$ <span id="orderDelivery"></span></p>
+                    <p><strong>Desconto:</strong> R$ <span id="orderDiscount"></span></p>
+                    <p><strong>Total:</strong> R$ <span id="orderTotal"></span></p>
+                </div>
+                
+                <div class="order-section">
+                    <h3>Agendamento</h3>
+                    <p><strong>Data:</strong> <span id="orderScheduleDate"></span></p>
+                    <p><strong>Hora:</strong> <span id="orderScheduleTime"></span></p>
+                </div>
+                
+                <div class="order-section">
+                    <h3>Gerenciar Status</h3>
+                    <div class="form-group">
+                        <label for="orderStatus">Status:</label>
+                        <select id="orderStatus">
+                            <option value="Pendente">Pendente</option>
+                            <option value="Confirmado">Confirmado</option>
+                            <option value="Em Preparação">Em Preparação</option>
+                            <option value="Pronto para Retirada">Pronto para Retirada</option>
+                            <option value="Em Entrega">Em Entrega</option>
+                            <option value="Concluído">Concluído</option>
+                            <option value="Em Espera">Em Espera</option>
+                            <option value="Cancelado">Cancelado</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="motivoEsperaGroup" style="display: none;">
+                        <label for="orderMotivoEspera">Motivo da Espera:</label>
+                        <textarea id="orderMotivoEspera" rows="3" placeholder="Informe o motivo da espera..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="orderObservacoes">Observações:</label>
+                        <textarea id="orderObservacoes" rows="3" placeholder="Adicione observações sobre o pedido..."></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="fecharModalPedido()">Fechar</button>
+                <button type="button" class="btn btn-primary" onclick="salvarPedido()">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Adicionar/Editar Produto -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle">Adicionar Produto</h2>
+            <form id="productForm">
+                <input type="hidden" id="productId">
+                <div class="form-group">
+                    <label for="productName">Nome:</label>
+                    <input type="text" id="productName" required>
+                </div>
+                <div class="form-group">
+                    <label for="productDescription">Descrição:</label>
+                    <textarea id="productDescription" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="productImage">URL da Imagem:</label>
+                    <input type="text" id="productImage" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productPriceRetirada">Preço Retirada (R$):</label>
+                        <input type="number" id="productPriceRetirada" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="productPriceEntrega">Preço Entrega (R$):</label>
+                        <input type="number" id="productPriceEntrega" step="0.01" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="productWeight">Peso:</label>
+                        <input type="text" id="productWeight" placeholder="Ex: 5kg" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="productCategory">Categoria:</label>
+                        <select id="productCategory" required>
+                            <option value="premium">Premium</option>
+                            <option value="basico">Básico</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="productStock">Estoque:</label>
+                        <input type="number" id="productStock" required>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/admin.js"></script>
+</body>
+</html>
+

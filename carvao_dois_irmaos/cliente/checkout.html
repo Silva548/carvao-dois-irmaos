@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Pedido - Carvão Especial Dois Irmãos</title>
+    <link rel="stylesheet" href="../assets/css/checkout.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <h1><a href="produtos.html">Carvão Especial Dois Irmãos</a></h1>
+            </div>
+            <div class="header-actions">
+                <div class="user-info">
+                    <span id="userName">Olá, Visitante</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1 class="page-title">Finalizar Pedido</h1>
+            
+            <div class="checkout-layout">
+                <div class="checkout-form-section">
+                    <form id="checkoutForm">
+                        <!-- Informações do Cliente -->
+                        <section class="form-section">
+                            <h2>Informações do Cliente</h2>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="customerName">Nome Completo:</label>
+                                    <input type="text" id="customerName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="customerEmail">E-mail:</label>
+                                    <input type="email" id="customerEmail" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="customerPhone">Telefone:</label>
+                                    <input type="tel" id="customerPhone" required>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Endereço -->
+                        <section class="form-section">
+                            <h2>Endereço</h2>
+                            <div class="form-grid">
+                                <div class="form-group full-width">
+                                    <label for="address">Endereço Completo:</label>
+                                    <input type="text" id="address" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cep">CEP:</label>
+                                    <input type="text" id="cep" required>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Agendamento (para retirada) -->
+                        <section class="form-section" id="agendamentoSection">
+                            <h2>Agendamento de Retirada</h2>
+                            <p class="section-description">Selecione a data e hora desejadas para retirar seu pedido.</p>
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="dataRetirada">Data:</label>
+                                    <input type="date" id="dataRetirada">
+                                </div>
+                                <div class="form-group">
+                                    <label for="horaRetirada">Hora:</label>
+                                    <input type="time" id="horaRetirada">
+                                </div>
+                            </div>
+                            <div class="pickup-location">
+                                <h3>📍 Local de Retirada:</h3>
+                                <p>Rua dos Churrasqueiros, 123 - Centro</p>
+                                <p><a href="https://maps.google.com/maps/search/Carv%C3%A3o%20dois%20irm%C3%A3os/@-29.07238713,-49.53898147,17z?hl=pt-BR"></a></p>
+                                <p>Horário de funcionamento: Seg-Sex 7h-11h,13-17 Sáb 7h-12h</p>
+                            </div>
+                        </section>
+
+                        <!-- Informações de Entrega -->
+                        <section class="form-section hidden" id="entregaSection">
+                            <h2>Informações de Entrega</h2>
+                            <p class="section-description">Seu pedido será entregue no endereço informado acima.</p>
+                            <div class="delivery-info">
+                                <p><strong>Prazo estimado:</strong> 2-3 dias úteis</p>
+                                <p><strong>Custo adicional:</strong> Já incluído no total</p>
+                            </div>
+                        </section>
+
+                        <!-- Forma de Pagamento -->
+                        <section class="form-section">
+                            <h2>Forma de Pagamento</h2>
+                            <div class="payment-options">
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="pix" checked>
+                                    <div class="payment-card">
+                                        <span class="payment-icon">💳</span>
+                                        <span class="payment-name">PIX</span>
+                                    </div>
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="cartao">
+                                    <div class="payment-card">
+                                        <span class="payment-icon">💳</span>
+                                        <span class="payment-name">Cartão de Crédito</span>
+                                    </div>
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="boleto">
+                                    <div class="payment-card">
+                                        <span class="payment-icon">📄</span>
+                                        <span class="payment-name">Boleto Bancário</span>
+                                    </div>
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="dinheiro">
+                                    <div class="payment-card">
+                                        <span class="payment-icon">💵</span>
+                                        <span class="payment-name">Dinheiro (na retirada/entrega)</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </section>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" onclick="voltarCarrinho()">Voltar ao Carrinho</button>
+                            <button type="submit" class="btn btn-primary">Confirmar Pedido</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Resumo do Pedido -->
+                <div class="order-summary">
+                    <h2>Resumo do Pedido</h2>
+                    
+                    <div class="summary-items" id="summaryItems">
+                        <!-- Itens serão carregados dinamicamente -->
+                    </div>
+                    
+                    <div class="summary-totals">
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span id="summarySubtotal">R$ 0,00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Custo de Entrega:</span>
+                            <span id="summaryCustoEntrega">R$ 0,00</span>
+                        </div>
+                        <div class="summary-row discount" id="discountRow" style="display: none;">
+                            <span>Desconto PIX (5%):</span>
+                            <span id="summaryDiscount">-R$ 0,00</span>
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-row summary-total">
+                            <span>Total:</span>
+                            <span id="summaryTotal">R$ 0,00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Sobre Nós</h3>
+                <p>Carvão Especial Dois Irmãos - Qualidade que acende a sua paixão!</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <p>📞 (48)998498867</p>
+                <p>📧 dasilvanicolas117@gmail.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>Redes Sociais</h3>
+                <p>
+                    <a href="https://www.instagram.com/carvao_dois_irmaos2?igsh=amFreGI3dnluOWNi">Instagram</a>
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p><a href="#">Termos de Uso</a> | <a href="#">Política de Privacidade</a></p>
+            <p>&copy; 2025 Carvão Especial Dois Irmãos. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/maps.js"></script>
+    <script src="../assets/js/checkout.js"></script>
+</body>
+</html>
+

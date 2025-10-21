@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carvão Especial Dois Irmãos - Bem-vindo</title>
+    <link rel="stylesheet" href="../assets/css/login.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>Carvão Especial Dois Irmãos</h1>
+                <p class="slogan">Qualidade que acende a sua paixão!</p>
+            </div>
+        </header>
+
+        <main>
+            <div class="welcome-box">
+                <h2>Bem-vindo!</h2>
+                <p class="welcome-message">Para uma experiência personalizada, faça login ou cadastre-se.</p>
+
+                <!-- Formulário de Login -->
+                <div class="form-section" id="loginSection">
+                    <h3>Login</h3>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="loginEmail">E-mail:</label>
+                            <input type="email" id="loginEmail" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Senha:</label>
+                            <input type="password" id="loginPassword" name="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Entrar</button>
+                        <a href="#" class="forgot-password">Esqueceu sua senha?</a>
+                    </form>
+                    <div class="divider">
+                        <p>Não tem uma conta?</p>
+                        <button class="btn btn-secondary" id="showRegisterBtn">Cadastre-se</button>
+                    </div>
+                </div>
+
+                <!-- Formulário de Cadastro -->
+                <div class="form-section hidden" id="registerSection">
+                    <h3>Cadastro</h3>
+                    <form id="registerForm">
+                        <div class="form-group">
+                            <label for="registerName">Nome Completo:</label>
+                            <input type="text" id="registerName" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerEmail">E-mail:</label>
+                            <input type="email" id="registerEmail" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPassword">Senha:</label>
+                            <input type="password" id="registerPassword" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPhone">Telefone:</label>
+                            <input type="tel" id="registerPhone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerAddress">Endereço Completo:</label>
+                            <input type="text" id="registerAddress" name="address" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerCEP">CEP:</label>
+                            <input type="text" id="registerCEP" name="cep" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Cadastrar</button>
+                        <button type="button" class="btn btn-secondary" id="showLoginBtn">Voltar para Login</button>
+                    </form>
+                </div>
+
+                <!-- Opção de Convidado -->
+                <div class="guest-section">
+                    <p class="guest-text">Ou continue como convidado e informe sua localização:</p>
+                    <form id="guestForm">
+                        <div class="form-group">
+                            <label for="guestCEP">CEP ou Endereço:</label>
+                            <input type="text" id="guestCEP" name="location" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Confirmar Localização</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p><a href="#">Termos de Uso</a> | <a href="#">Política de Privacidade</a></p>
+        </footer>
+    </div>
+
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/login.js"></script>
+</body>
+</html>
+

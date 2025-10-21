@@ -31,7 +31,7 @@ function carregarCarrinho() {
     cartItems.innerHTML = '';
     
     carrinho.forEach((item, index) => {
-        const preco = item.tipoCompra === 'entrega' ? item.precoEntrega : item.precoRetirada;
+        const preco = item.tipoCompra === 'entrega' ? item.precoEntrega : item.tipoCompra === 'carga fechada' ? item.precocargafechada : item.precoRetirada;
         const subtotalItem = preco * item.quantidade;
         
         const cartItem = document.createElement('div');
@@ -41,7 +41,7 @@ function carregarCarrinho() {
             
             <div class="item-details">
                 <h3 class="item-name">${item.nome}</h3>
-                <p class="item-type">${item.tipoCompra === 'entrega' ? '🚚 Entrega' : '🏪 Retirada no Local'}</p>
+                <p class="item-type">${item.tipoCompra === 'entrega' ? ' Entrega' : item.tipoCompra === 'carga fechada' ? ' carga fechada' : ' Retirada no Local'}</p>
                 <p class="item-price">R$ ${preco.toFixed(2)} x ${item.quantidade} = R$ ${subtotalItem.toFixed(2)}</p>
             </div>
             
@@ -96,18 +96,19 @@ function atualizarResumo() {
     let custoEntrega = 0;
     
     carrinho.forEach(item => {
-        const preco = item.tipoCompra === 'entrega' ? item.precoEntrega : item.precoRetirada;
+        const preco = item.tipoCompra === 'entrega' ? item.precoEntrega : item.tipoCompra === 'carga fechada' ? item.precoRetirada : item.precoRetirada;
         subtotal += preco * item.quantidade;
         
         // Calcular custo adicional da entrega
         if (item.tipoCompra === 'entrega') {
-            custoEntrega += (item.precoEntrega - item.precoRetirada) * item.quantidade;
+            custoEntrega += (item.precoEntrega -item.precocargafechada- item.precoRetirada) * item.quantidade;
         }
     });
     
     const total = subtotal;
     
     document.getElementById('subtotal').textContent = `R$ ${subtotal.toFixed(2)}`;
+     document.getElementById('custocargafechada').textContent = custocargafechada > 0 ? `R$ ${custocargafechada.toFixed(2)}` : 'Grátis';
     document.getElementById('custoEntrega').textContent = custoEntrega > 0 ? `R$ ${custoEntrega.toFixed(2)}` : 'Grátis';
     document.getElementById('total').textContent = `R$ ${total.toFixed(2)}`;
 }

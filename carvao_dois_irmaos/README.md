@@ -162,11 +162,11 @@ carvao_dois_irmaos/
 
 ## Produtos Disponíveis
 
-| Produto | Peso | Preço Retirada | Preço Entrega |
-|---------|------|----------------|---------------|
-| Carvão Premium | 5kg | R$ 17,00 | R$ 20,00 |
-| Carvão Premium | 3kg | R$ 10,00 | R$ 11,50 |
-| Carvão Básico | 5kg | R$ 15,00 | R$ 16,00 |
+| Produto | Peso | Preço Retirada | Preço Entrega|preço carga fechada|
+|---------|------|----------------|------------- |-------------------|
+| Carvão Premium | 5kg | R$ 17,00 | R$ 20,00     | R$ 18,00
+| Carvão Premium | 3kg | R$ 10,00 | R$ 11,50     | R$ 10,50
+| Carvão Básico  | 5kg | R$ 15,00 | R$ 16,00     | R$ 15,50
 
 ## Integração com Google Maps
 
@@ -208,9 +208,8 @@ Para habilitar a integração completa com Google Maps:
 
 Para dúvidas ou problemas, entre em contato:
 - 📞 (48)998498867
-- 📧 dasilvanicolas117@gmail.com
+-📧 dasilvanicolas117@gmail.com
 
 ---
 
-**Desenvolvido por Manus AI** - 2025
 

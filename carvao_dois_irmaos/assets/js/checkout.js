@@ -1,9 +1,11 @@
 // Variáveis globais
 let subtotal = 0;
+let custocargafechada = 0;
 let custoEntrega = 0;
 let desconto = 0;
 let total = 0;
 let temEntrega = false;
+let temcargafechada = false;
 let temRetirada = false;
 
 // Verificar usuário logado
@@ -47,13 +49,13 @@ function carregarResumo() {
     temRetirada = false;
     
     carrinho.forEach(item => {
-        const preco = item.tipoCompra === 'entrega' ? item.precoEntrega : item.precoRetirada;
+        const preco = item.tipoCompra === 'entrega' ? item.precoEntrega : item.tipoCompra === 'carga fechada' ? item.precocargafechada : item.precoRetirada;
         const subtotalItem = preco * item.quantidade;
         subtotal += subtotalItem;
         
         if (item.tipoCompra === 'entrega') {
             temEntrega = true;
-            custoEntrega += (item.precoEntrega - item.precoRetirada) * item.quantidade;
+            custoEntrega += (item.precoEntrega -item,precocargafechada - item.precoRetirada) * item.quantidade;
         } else {
             temRetirada = true;
         }
@@ -63,7 +65,7 @@ function carregarResumo() {
         summaryItem.innerHTML = `
             <div class="item-info">
                 <div class="item-name">${item.nome}</div>
-                <div class="item-details">${item.tipoCompra === 'entrega' ? 'Entrega' : 'Retirada'} - ${item.quantidade}x</div>
+                <div class="item-details">${item.tipoCompra === 'entrega' ? 'Entrega' : item.tipoCompra === 'carga fechada' ? 'carga fechada' : 'Retirada'} - ${item.quantidade}x</div>
             </div>
             <div class="item-price">R$ ${subtotalItem.toFixed(2)}</div>
         `;
@@ -73,18 +75,21 @@ function carregarResumo() {
     // Mostrar/ocultar seções de agendamento e entrega
     if (temRetirada && !temEntrega) {
         document.getElementById('agendamentoSection').classList.remove('hidden');
+         document.getElementById('cargafechadaSection').classList.add('hidden');
         document.getElementById('entregaSection').classList.add('hidden');
         // Tornar campos de agendamento obrigatórios
         document.getElementById('dataRetirada').required = true;
         document.getElementById('horaRetirada').required = true;
     } else if (temEntrega && !temRetirada) {
         document.getElementById('agendamentoSection').classList.add('hidden');
+         document.getElementById('cargafechadaSection').classList.remove('hidden');
         document.getElementById('entregaSection').classList.remove('hidden');
         document.getElementById('dataRetirada').required = false;
         document.getElementById('horaRetirada').required = false;
     } else {
         // Ambos os tipos
         document.getElementById('agendamentoSection').classList.remove('hidden');
+        document.getElementById('cargafechadaSection').classList.remove('hidden');
         document.getElementById('entregaSection').classList.remove('hidden');
         document.getElementById('dataRetirada').required = true;
         document.getElementById('horaRetirada').required = true;
@@ -104,6 +109,7 @@ function atualizarTotais() {
     total = subtotal - desconto;
     
     document.getElementById('summarySubtotal').textContent = `R$ ${subtotal.toFixed(2)}`;
+    document.getElementById('summaryCustocargafechada').textContent = custocargafechada > 0 ? `R$ ${custocargafechada.toFixed(2)}` : 'Grátis';
     document.getElementById('summaryCustoEntrega').textContent = custoEntrega > 0 ? `R$ ${custoEntrega.toFixed(2)}` : 'Grátis';
     document.getElementById('summaryDiscount').textContent = `-R$ ${desconto.toFixed(2)}`;
     document.getElementById('summaryTotal').textContent = `R$ ${total.toFixed(2)}`;
@@ -156,6 +162,7 @@ document.getElementById('checkoutForm').addEventListener('submit', (e) => {
         },
         itens: JSON.parse(localStorage.getItem('carrinho')),
         subtotal: subtotal,
+        custocargafechada: custocargafechada,
         custoEntrega: custoEntrega,
         desconto: desconto,
         total: total,
@@ -176,7 +183,7 @@ document.getElementById('checkoutForm').addEventListener('submit', (e) => {
     localStorage.removeItem('carrinho');
     
     // Exibir mensagem de sucesso
-    alert(`🎉 Pedido confirmado com sucesso!\n\nNúmero do pedido: #${pedido.id}\nTotal: R$ ${total.toFixed(2)}\nForma de pagamento: ${getPaymentMethodName(paymentMethod)}\n\nVocê receberá um e-mail de confirmação em breve.`);
+    alert(`Pedido confirmado com sucesso!\n\nNúmero do pedido: #${pedido.id}\nTotal: R$ ${total.toFixed(2)}\nForma de pagamento: ${getPaymentMethodName(paymentMethod)}\n\nVocê receberá um e-mail de confirmação em breve.`);
     
     // Redirecionar para a página de produtos
     window.location.href = 'produtos.html';

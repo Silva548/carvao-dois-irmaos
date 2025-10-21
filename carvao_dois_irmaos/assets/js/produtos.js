@@ -77,9 +77,15 @@ function carregarProdutos() {
                         <span class="price-label">Retirada:</span>
                         <span class="price-value">R$ ${produto.precoRetirada.toFixed(2)}</span>
                     </div>
-                    <div class="price-option">
+
+                <div class="price-option">
                         <span class="price-label">Entrega:</span>
                         <span class="price-value">R$ ${produto.precoEntrega.toFixed(2)}</span>
+                    </div>
+                    
+                    <div class="price-option">
+                        <span class="price-label">carga fecgada:</span>
+                        <span class="price-value">R$ ${produto.precocargafechada.toFixed(2)}</span>
                     </div>
                 </div>
                 <div class="product-actions">
@@ -183,6 +189,12 @@ document.getElementById('searchBtn').addEventListener('click', () => {
                         <span class="price-label">Retirada:</span>
                         <span class="price-value">R$ ${produto.precoRetirada.toFixed(2)}</span>
                     </div>
+
+                     <div class="price-option">
+                        <span class="price-label">carga fechada:</span>
+                        <span class="price-value">R$ ${produto.precocargafechada.toFixed(2)}</span>
+                    </div>
+
                     <div class="price-option">
                         <span class="price-label">Entrega:</span>
                         <span class="price-value">R$ ${produto.precoEntrega.toFixed(2)}</span>

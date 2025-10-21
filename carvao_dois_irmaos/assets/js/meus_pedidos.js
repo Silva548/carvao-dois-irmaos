@@ -86,11 +86,11 @@ function criarCardPedido(pedido) {
     // Criar lista de itens
     let itensHTML = '';
     pedido.itens.forEach(item => {
-        const preco = item.tipoCompra === 'entrega' ? item.precoEntrega : item.precoRetirada;
+        const preco = item.tipoCompra === 'entrega' ? item.precoEntrega :  item.tipoCompra === 'carga fechada' ? item.precocargafechada : item.precoRetirada;
         const subtotal = preco * item.quantidade;
         itensHTML += `
             <li>
-                <span>${item.quantidade}x ${item.nome} (${item.tipoCompra === 'entrega' ? 'Entrega' : 'Retirada'})</span>
+                <span>${item.quantidade}x ${item.nome} (${item.tipoCompra === 'entrega' ? 'Entrega' : item.tipoCompra === 'carga fechada' ? 'carga fechada' : 'Retirada'})</span>
                 <span>R$ ${subtotal.toFixed(2)}</span>
             </li>
         `;
@@ -152,7 +152,7 @@ function criarCardPedido(pedido) {
         
         <div class="pedido-actions">
             <button class="btn btn-danger" onclick="cancelarPedidoConfirm(${pedido.id})" ${!podeCancelar ? 'disabled' : ''}>
-                ${podeCancelar ? '❌ Cancelar Pedido' : '🚫 Não é possível cancelar'}
+                ${podeCancelar ? ' Cancelar Pedido' : ' Não é possível cancelar'}
             </button>
         </div>
     `;

@@ -21,24 +21,10 @@ let usuarios = [];
 // Administradores fixos
 let administradores = [
     {
-        id: 1,
-        name: 'Admin 1',
-        email: 'admin1@carvaodoisirmaos.com',
-        password: 'admin123',
-        type: 'admin'
-    },
-    {
-        id: 2,
-        name: 'Admin 2',
-        email: 'admin2@carvaodoisirmaos.com',
-        password: 'admin123',
-        type: 'admin'
-    },
-    {
-        id: 3,
-        name: 'Admin 3',
-        email: 'admin3@carvaodoisirmaos.com',
-        password: 'admin123',
+        id: 548,
+        name: 'Admin548',
+        email: 'admin548@gmail.com',
+        password: 'admin548',
         type: 'admin'
     }
 ];
@@ -123,12 +109,12 @@ app.post('/api/usuarios/login', (req, res) => {
     const { email, password } = req.body;
     
     // Verificar se é administrador
-    const admin = administradores.find(a => a.email === email && a.password === password);
+    const admin = administradores.find(u => a.email === email && a.password === password );
     if (admin) {
         return res.json({ 
             success: true, 
             message: 'Login de administrador realizado com sucesso!',
-            usuario: { ...admin, password: undefined }
+           
         });
     }
     
@@ -179,7 +165,7 @@ app.get('/api/produtos/:id', (req, res) => {
 
 // Criar produto (Admin)
 app.post('/api/produtos', (req, res) => {
-    const { nome, descricao, imagem, precoRetirada, precoEntrega, peso, categoria, estoque } = req.body;
+    const { nome, descricao, imagem, precoRetirada, precocargafechada, precoEntrega, peso, categoria, estoque } = req.body;
     
     const novoProduto = {
         id: Date.now(),
@@ -187,6 +173,7 @@ app.post('/api/produtos', (req, res) => {
         descricao,
         imagem,
         precoRetirada: parseFloat(precoRetirada),
+        precocargafechada: parseFloat(precocargafechada),
         precoEntrega: parseFloat(precoEntrega),
         peso,
         categoria,
@@ -208,7 +195,7 @@ app.put('/api/produtos/:id', (req, res) => {
     const index = produtos.findIndex(p => p.id === id);
     
     if (index !== -1) {
-        const { nome, descricao, imagem, precoRetirada, precoEntrega, peso, categoria, estoque } = req.body;
+        const { nome, descricao, imagem, precoRetirada, precocargafechada,precoEntrega, peso, categoria, estoque } = req.body;
         
         produtos[index] = {
             ...produtos[index],
@@ -216,6 +203,7 @@ app.put('/api/produtos/:id', (req, res) => {
             descricao: descricao || produtos[index].descricao,
             imagem: imagem || produtos[index].imagem,
             precoRetirada: precoRetirada !== undefined ? parseFloat(precoRetirada) : produtos[index].precoRetirada,
+             precocargafechada: precocargafechada !== undefined ? parseFloat(precocargafechada) : produtos[index].precocargafechada,
             precoEntrega: precoEntrega !== undefined ? parseFloat(precoEntrega) : produtos[index].precoEntrega,
             peso: peso || produtos[index].peso,
             categoria: categoria || produtos[index].categoria,
@@ -258,7 +246,7 @@ app.delete('/api/produtos/:id', (req, res) => {
 
 // Criar pedido
 app.post('/api/pedidos', (req, res) => {
-    const { cliente, itens, subtotal, custoEntrega, desconto, total, formaPagamento, agendamento } = req.body;
+    const { cliente, itens, subtotal, custocargafechada, custoEntrega, desconto, total, formaPagamento, agendamento } = req.body;
     
     // Verificar estoque
     for (let item of itens) {

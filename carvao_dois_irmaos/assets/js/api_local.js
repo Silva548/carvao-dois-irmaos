@@ -8,7 +8,7 @@ function inicializarDados() {
             {
                 id: 1,
                 nome: 'Carvão Premium 5kg',
-                descricao: 'Carvão vegetal premium de alta qualidade, ideal para churrascos. Produzido com madeira selecionada, garante longa duração e baixa produção de fumaça.',
+                descricao: 'Carvão vegetal premium de alta qualidade, ideal para churrascos. Produzido com madeira selecionada.',
                 categoria: 'premium',
                 peso: '5kg',
                 precoRetirada: 17.00,

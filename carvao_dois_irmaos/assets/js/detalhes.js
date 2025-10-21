@@ -64,6 +64,12 @@ function carregarDetalhes() {
                         <span class="price-label">Retirada no Local:</span>
                         <span class="price-value">R$ ${produto.precoRetirada.toFixed(2)}</span>
                     </div>
+
+                    <div class="price-option">
+                        <span class="price-label">Entrega com carga fechada em Casa:</span>
+                        <span class="price-value">R$ ${produto.precocargafechada.toFixed(2)}</span>
+                    </div>
+
                     <div class="price-option">
                         <span class="price-label">Entrega em Casa:</span>
                         <span class="price-value">R$ ${produto.precoEntrega.toFixed(2)}</span>
@@ -80,6 +86,12 @@ function carregarDetalhes() {
                                 <input type="radio" id="retirada" name="tipoCompra" value="retirada" checked>
                                 <label for="retirada">Retirada no Local</label>
                             </div>
+
+                            <div class="radio-option">
+                                <input type="radio" id="carga fechada" name="tipoCompra" value="carga fechada">
+                                <label for="entrega">Entrega com carga fechada em Casa</label>
+                            </div>
+
                             <div class="radio-option">
                                 <input type="radio" id="entrega" name="tipoCompra" value="entrega">
                                 <label for="entrega">Entrega em Casa</label>
@@ -232,6 +244,7 @@ function adicionarAoCarrinho() {
             nome: produto.nome,
             imagem: produto.imagem,
             precoRetirada: produto.precoRetirada,
+            precocargafechada: produto.precocargafechada,
             precoEntrega: produto.precoEntrega,
             tipoCompra: tipoCompra,
             quantidade: quantidade

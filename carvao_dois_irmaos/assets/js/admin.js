@@ -64,11 +64,12 @@ async function carregarProdutos() {
                 <td>${produto.nome}</td>
                 <td>${produto.categoria === 'premium' ? 'Premium' : 'Básico'}</td>
                 <td>R$ ${produto.precoRetirada.toFixed(2)}</td>
+                <td>R$ ${produto.precocargafechada.toFixed(2)}</td>
                 <td>R$ ${produto.precoEntrega.toFixed(2)}</td>
                 <td>${produto.estoque}</td>
                 <td>
-                    <button class="btn btn-secondary btn-small" onclick="editarProduto(${produto.id})">✏️ Editar</button>
-                    <button class="btn btn-danger btn-small" onclick="deletarProdutoConfirm(${produto.id})">🗑️ Deletar</button>
+                    <button class="btn btn-secondary btn-small" onclick="editarProduto(${produto.id})"> Editar</button>
+                    <button class="btn btn-danger btn-small" onclick="deletarProdutoConfirm(${produto.id})"> Deletar</button>
                 </td>
             `;
             tbody.appendChild(tr);
@@ -88,11 +89,12 @@ async function carregarProdutos() {
                 <td>${produto.nome}</td>
                 <td>${produto.categoria === 'premium' ? 'Premium' : 'Básico'}</td>
                 <td>R$ ${produto.precoRetirada.toFixed(2)}</td>
+                <td>R$ ${produto.precocargafechada.toFixed(2)}</td>
                 <td>R$ ${produto.precoEntrega.toFixed(2)}</td>
                 <td>${produto.estoque || 0}</td>
                 <td>
-                    <button class="btn btn-secondary btn-small" onclick="editarProduto(${produto.id})">✏️ Editar</button>
-                    <button class="btn btn-danger btn-small" onclick="deletarProdutoConfirm(${produto.id})">🗑️ Deletar</button>
+                    <button class="btn btn-secondary btn-small" onclick="editarProduto(${produto.id})"> Editar</button>
+                    <button class="btn btn-danger btn-small" onclick="deletarProdutoConfirm(${produto.id})"> Deletar</button>
                 </td>
             `;
             tbody.appendChild(tr);
@@ -165,6 +167,7 @@ async function editarProduto(id) {
         document.getElementById('productDescription').value = produto.descricao;
         document.getElementById('productImage').value = produto.imagem;
         document.getElementById('productPriceRetirada').value = produto.precoRetirada;
+        document.getElementById('productPricecargafechada').value = produto.precocargafechada;
         document.getElementById('productPriceEntrega').value = produto.precoEntrega;
         document.getElementById('productWeight').value = produto.peso;
         document.getElementById('productCategory').value = produto.categoria;
@@ -232,7 +235,7 @@ function renderizarPedidos(pedidos) {
             <td>${getPaymentMethodName(pedido.formaPagamento)}</td>
             <td><span class="status-badge ${statusClass}">${pedido.status}</span></td>
             <td>
-                <button class="btn btn-primary btn-small" onclick="abrirModalPedido(${pedido.id})">📋 Gerenciar</button>
+                <button class="btn btn-primary btn-small" onclick="abrirModalPedido(${pedido.id})"> Gerenciar</button>
             </td>
         `;
         tbody.appendChild(tr);
@@ -260,7 +263,7 @@ async function abrirModalPedido(id) {
         pedido.itens.forEach(item => {
             const itemDiv = document.createElement('div');
             itemDiv.style.marginBottom = '10px';
-            itemDiv.innerHTML = `<p>${item.quantidade}x ${item.nome} (${item.tipoCompra}) - R$ ${(item.quantidade * (item.tipoCompra === 'entrega' ? item.precoEntrega : item.precoRetirada)).toFixed(2)}</p>`;
+            itemDiv.innerHTML = `<p>${item.quantidade}x ${item.nome} (${item.tipoCompra}) - R$ ${(item.quantidade * (item.tipoCompra === 'entrega' ? item.precoEntrega : item.tipoCompra === 'carga fechada' ? item.precocargafechada : item.precoRetirada)).toFixed(2)}</p>`;
             orderItems.appendChild(itemDiv);
         });
         
